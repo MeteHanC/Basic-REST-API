@@ -1,6 +1,8 @@
 <?php
 // DIC configuration
 
+use REST\StudentRepository;
+
 $container = $app->getContainer();
 
 // view renderer
@@ -19,6 +21,6 @@ $container['logger'] = function ($c) {
 };
 
 $container["StudentController"]=function ($c) {
-    $db=new \REST\StudentRepository();
+    $db=new StudentRepository();
     return new \REST\StudentController($db);
 };

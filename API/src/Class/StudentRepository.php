@@ -4,7 +4,6 @@ namespace REST;
 
 use Slim\PDO\Database;
 
-require "../vendor/autoload.php";
 
 interface IStudentRepository
 {

@@ -1,7 +1,5 @@
 <?php
 
-namespace REST;
-
 require  '../vendor/autoload.php';
 
 if (PHP_SAPI == 'cli-server') {

@@ -34,7 +34,7 @@ create table if not exists Students(id int not null primary key,name char(20));
 
 ### Usage
 
-There are currently 3 requests, "get_names", "get_all", "add_student". Please take a look at the below examples given in Python
+There are currently 3 requests, "get_names", "get_all" and "add_student". Please take a look at the below examples given in Python
 
 Getting all the content from API. Returns a JSON
 
@@ -59,5 +59,7 @@ import requests
 response = requests.post("http://localhost/Basic-REST-API/public/index.php/add_student/Student_ID/Student_Name")
 ```
 
+### Example
 
+You can find the Python examples in the Client directory. 
 

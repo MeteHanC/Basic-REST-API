@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>REST</title>
+        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                margin: 30px 0 0 0;
+                padding: 0;
+                width: 100%;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-align: center;
+                color: #aaa;
+                font-size: 15px;
+            }
+
+            h1 {
+                color: #719e40;
+                letter-spacing: -3px;
+                font-family: 'Lato', sans-serif;
+                font-size: 50px;
+                font-weight: 200;
+                margin-bottom: 0;
+            }
+            table{
+                width: %100;
+                margin-left: 600px;
+                margin-top: 10px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color : #719e40;
+                border-color: darkgreen;
+
+            }
+            form{
+                margin-top: 10px;
+            }
+            input[name=student_ID]{
+                margin-left: 25px;
+            }
+            input[name=insert]{
+                border-color: #4CAF50;
+                border-radius: 30px;
+                background-color: transparent;
+                margin-left: 100px;
+                margin-top:5px;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+            }
+            input[name=insert]:hover{
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+            input[name=id_tobe_changed]{
+                margin-left:30px;
+            }
+            input[name=new_name]{
+                margin-left:25px;
+            }
+            input[name=update]{
+                border-color: #4CAF50;
+                border-radius: 30px;
+                background-color: transparent;
+                margin-left: 100px;
+                margin-top:5px;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+            }
+            input[name=update]:hover{
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+            input[name=getStudents]{
+                border-color: #4CAF50;
+                border-radius: 30px;
+                background-color: transparent;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+            }
+            input[name=getStudents]:hover{
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+            input[name=getStudentNames]{
+                border-color: #4CAF50;
+                border-radius: 30px;
+                background-color: transparent;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+            }
+            input[name=getStudentNames]:hover{
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+
+
+        </style>
+        <h1>Basic Rest Framework</h1>
+    </head>
+    <body>
+        <h1>Metehan</h1>
+        <div>An Intern at JotForm</div>
+        <form action="../public/index.php" method="post">
+            <input type="submit" name="getStudents" value="Student Details" />
+        </form>
+        <form action="../public/index.php" method="post">
+            <input type="submit" name="getStudentNames" value="Student Names" />
+        </form>
+        <h1>Add Student</h1>
+        <form action="../public/index.php" method="post" id="3">
+            Student ID: <input  type="text" name="student_ID"><br>
+            Student Name: <input type="text" name="student_Name"><br>
+            <input type="submit" value="Insert" name="insert">
+        </form>
+        <h1>Update Student Name</h1>
+        <form action="../public/index.php" method="post">
+            Student Id: <input type="text" name="id_tobe_changed"><br>
+            New Name: <input type="text" name="new_name"><br>
+            <input type="submit" value="Update" name="update">
+        </form>
+
+        <?php if (isset($name)) : ?>
+            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
+        <?php endif; ?>
+    </body>
+</html>

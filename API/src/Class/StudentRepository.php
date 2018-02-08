@@ -2,6 +2,8 @@
 
 namespace REST;
 
+use Slim\Http\Request;
+use Slim\Http\Response;
 use Slim\PDO\Database;
 
 
@@ -9,10 +11,9 @@ interface IStudentRepository
 {
     //Functions to be defined
     public function __construct();
-    public function getStudentNames();
-    public function getAll();
-    public function addStudent($name, $id);
-    public function updateName($id, $new_name);
+    public function getStudentNames($id, $response);
+    public function getAll(Response $response);
+    public function addStudent(Response $response, $name, $id);
 }
 
 
@@ -31,47 +32,38 @@ class StudentRepository implements IStudentRepository
         $this->pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
     }
 
-    public function getStudentNames()
+    public function getStudentNames($id,$response)
     {
-        $array_val = array();
-        $sql = 'SELECT name FROM Students';
-        $cntrl=0;
-        foreach ($this->pdo->query($sql) as $row) {
-            $array_val[$cntrl]=$row["name"];
-            $cntrl++;
-        }
+        $stmt = $this->pdo->prepare('SELECT name FROM Students where id = :id');
+        $stmt->bindParam(":id", $id, \Slim\PDO\Database::PARAM_STR);
+        $stmt->execute();
+        $val = $stmt->fetch();
+        $n_resp = $response->withJson($val,200);
 
-        return json_encode($array_val)  ;
+        return $n_resp;
     }
 
-    public function getAll()
+    public function getAll(Response $response)
     {
         $array_val = array();
         $sql = 'SELECT * FROM Students';
-
         foreach ($this->pdo->query($sql) as $row) {
             $array_val[$row["id"]]=$row["name"];
         }
+        $n_resp = $response->withJson($array_val,200);
 
-        return json_encode($array_val);
+        return $n_resp;
     }
 
-    public function addStudent($id, $name)
+    public function addStudent(Response $response, $id, $name)
     {
 
         $stmt = $this->pdo->prepare('INSERT into Students(id,name) values(:id,:namee)');
         $stmt->bindParam(":id", $id, \Slim\PDO\Database::PARAM_STR);
         $stmt->bindParam(":namee", $name, \Slim\PDO\Database::PARAM_STR);
-
         $stmt->execute();
-    }
+        $n_response = $response->withStatus(201);
 
-    public function updateName($id, $new_name)
-    {
-        $stmt = $this->pdo->prepare('UPDATE Students set name=:namee where id=:id');
-        $stmt->bindParam(":id", $id, \Slim\PDO\Database::PARAM_STR);
-        $stmt->bindParam(":namee", $new_name, \Slim\PDO\Database::PARAM_STR);
-
-        $stmt->execute();
+        return $n_response;
     }
 }
